@@ -1,77 +1,45 @@
 # -- coding: utf-8 --
 ## sample-size-calculator
 
-## Calcule the apropiate size for a sample.
-
 ## Originally developed by Jorge Meneses (jorgejhms[at]gmail[dot]com).
 ## Released under a GNU General Public Licence v. 3.0.
-## Versión: 0.1.1
+## Versión: 0.2
 
+import argparse
 
+###Function definition###
+        
+def p_sample(N, p, z, E):
+	"Sample size calculation"
+	global n
+	q = 1 - p
+	z2 = z*z
+	E2 = E*E
+	n = (z2*N*p*q)/(N*E2+z2*p*q)
+	return n
 
-###Funtion definition###
-def sample(N, p, q, z2, E2):
-    "Sample size calculation"
-    n = (z2*N*p*q)/(N*E2+z2*p*q)
-    return n
-    
-def univers():
-    "Get input for Universe size"
-    N = raw_input("\nUnivers size?\n> " )
-    return int (N)
+###Arguments definition###
+parser = argparse.ArgumentParser(prog="Sample size calculator", description="Calcule the apropiate size for a sample.")
+parser.add_argument("Universe", default=0, type=int, help="Size of the Universe to sample")
+parser.add_argument("Error", default=0, type=float, help="Error margin desired")
+parser.add_argument("Confidence", default=0, type=int, help="Confidence degree desired")
+parser.add_argument("Proportion", nargs="?", default=0.5, type=float, help="Proportion desired. By default is 0.5")
+parser.add_argument('--version', action='version', version='%(prog)s 0.2')
+args = parser.parse_args()
 
-def proportion():
-    "Get input for proportion"
-    proportion = raw_input("\nProportion?\n(if doubt press ENTER)\n> ")
-    if proportion == "": 
-        p = 0.5 #max proportion value
-    else:
-        p = proportion
-    return float (p)
-
-def error():
-    "Get input for error margin"
-    E = raw_input("\nError margin?\n(Should not be high than 0.05)\n> ")
-    if float (E) > 0.05: #Check if error margin is correct
-        print "\nYou chose an error margin high than expected. Are you sure?"
-        answer = raw_input("Y/N? > ")
-        if answer == "N":
-            return error() #return allows to restart funtion
-        elif answer == "Y":
-            return float (E)
-        else:
-            print "\nDon't understan your answer"
-            print "\n...Asking again"
-            return error()
-    else:
-        return float (E)
-    
-def confidence ():
-    "Get input for confidence degree"
-    z = raw_input("\nConfidence degree?\n(write 3 for 99.73% confidence degree and 2 for 95,45%)\n> ")
-    if int (z) != 3 and int (z) != 2:
-        print "\nDon't understand.\n Write again"
-        return confidence()
-    else:
-        return int (z)
-         
-###Welcome message###
-print """
-Welcome to the sample size calculator program.
-After a few steps we are going to calcule the adecuete sample size for the universe given.
-"""
-
-###Aplicación de la formula###
-N = univers()
-p = proportion()
-E = error()
-z = confidence()
-q = 1 - p
-z2 = z*z
-E2 = E*E
-n = sample (N, p, q, z2, E2)
+	
+###Variable declaration###
+N=args.Universe
+n=0
+p=args.Proportion
+E=args.Error
+z=args.Confidence
+	
+p_sample (N, p, z, E)
 
 ###Data presentation###
-print """
-For an Universe size %r, a proportion of %r, error margin of %r, and confidence degree of %r.
-Your sample size should be %r\n""" % (N, p, E, z, n)
+print "Universe is %r" % N
+print "Proportion is %r" % p
+print "Error margin is %r" % E
+print "Confidence degree is %r" % z
+print "Sample size is %r" % n
