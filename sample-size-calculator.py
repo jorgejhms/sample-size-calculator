@@ -1,9 +1,8 @@
-# -- coding: utf-8 --
 ## sample-size-calculator
 
 ## Originally developed by Jorge Meneses (jorgejhms[at]gmail[dot]com).
 ## Released under a GNU General Public Licence v. 3.0.
-## Versión: 0.2
+## Versión: 0.3
 
 import argparse
 
@@ -24,7 +23,7 @@ parser.add_argument("Universe", default=0, type=int, help="Size of the Universe 
 parser.add_argument("Error", default=0, type=float, help="Error margin desired")
 parser.add_argument("Confidence", default=0, type=int, help="Confidence degree desired")
 parser.add_argument("Proportion", nargs="?", default=0.5, type=float, help="Proportion desired. By default is 0.5")
-parser.add_argument('--version', action='version', version='%(prog)s 0.2')
+parser.add_argument('--version', action='version', version='%(prog)s 0.3')
 args = parser.parse_args()
 
 	
@@ -38,8 +37,8 @@ z = args.Confidence
 p_sample(N, p, z, E)
 
 ###Data presentation###
-print "Universe is %r" % N
-print "Proportion is %r" % p
-print "Error margin is %r" % E
-print "Confidence degree is %r" % z
-print "Sample size is %r" % n
+print "Universe is {0}" .format(N)
+print "Proportion is {0}" .format(p)
+print "Error margin is {0}" .format(E)
+print "Confidence degree is {0}" .format(z)
+print "Sample size is {0}" .format(n)
