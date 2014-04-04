@@ -10,7 +10,7 @@ import argparse
         
 def p_sample(N, p, z, E):
 	"Sample size calculation"
-	global n
+	n = 0
 	q = 1 - p
 	n = ((z ** 2)*N*p*q)/(N*(E ** 2)+(z ** 2)*p*q)
 	return n
@@ -27,12 +27,11 @@ args = parser.parse_args()
 	
 ###Variable declaration###
 N = args.Universe
-n = 0
 p = args.Proportion
 E = args.Error
 z = args.Confidence
 	
-p_sample(N, p, z, E)
+n = p_sample(N, p, z, E)
 
 ###Data presentation###
 print ("Universe is", N)
