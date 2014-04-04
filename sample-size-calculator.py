@@ -12,9 +12,7 @@ def p_sample(N, p, z, E):
 	"Sample size calculation"
 	global n
 	q = 1 - p
-	z2 = z*z
-	E2 = E*E
-	n = (z2*N*p*q)/(N*E2+z2*p*q)
+	n = ((z ** 2)*N*p*q)/(N*(E ** 2)+(z ** 2)*p*q)
 	return n
 
 ###Arguments definition###
