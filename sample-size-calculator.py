@@ -37,8 +37,8 @@ z = args.Confidence
 p_sample(N, p, z, E)
 
 ###Data presentation###
-print "Universe is {0}" .format(N)
-print "Proportion is {0}" .format(p)
-print "Error margin is {0}" .format(E)
-print "Confidence degree is {0}" .format(z)
-print "Sample size is {0}" .format(n)
+print ("Universe is", N)
+print ("Proportion is", p)
+print ("Error margin is", E)
+print ("Confidence degree is", z)
+print ("Sample size is", n)
